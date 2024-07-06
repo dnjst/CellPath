@@ -6,7 +6,7 @@ def dijkstra_paths(adj, indeg = [0]):
         import networkx as nx
     except ImportError:
         print("please install networkx first")
-    G = nx.convert_matrix.from_numpy_matrix(A = np.where(adj == np.inf, 0, adj), create_using=nx.DiGraph)
+    G = nx.from_numpy_array(A = np.where(adj == np.inf, 0, adj), create_using=nx.DiGraph)
     starts = [x for x,d in G.in_degree() if d in indeg]
     # # also can use
     # dist, paths = nx.multi_source_dijkstra(G, starts, weight = 'weight')
@@ -37,7 +37,7 @@ def floyd_warshall(adj):
         print("please install networkx first")
     else:
         # consider disconnected nodes as connected with np.inf weight, or disconnected graph causing error
-        G = nx.convert_matrix.from_numpy_matrix(A = adj, create_using = nx.DiGraph)
+        G = nx.from_numpy_array(A = adj, create_using = nx.DiGraph)
         predecessors, distance = nx.floyd_warshall_predecessor_and_distance(G)
         N = adj.shape[0]
         paths = {}
